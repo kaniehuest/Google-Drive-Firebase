@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../../contexts/AuthContext";
+import CenteredContainer from "./CenteredContainer";
 
 export default function UpdateProfile() {
   const emailRef = useRef();
@@ -19,32 +20,32 @@ export default function UpdateProfile() {
       return setError("Passwords do not match");
     }
 
-    const promises = []
-    setLoading(true)
-    setError("")
+    const promises = [];
+    setLoading(true);
+    setError("");
 
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value))
+      promises.push(updateEmail(emailRef.current.value));
     }
 
     if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value))
+      promises.push(updatePassword(passwordRef.current.value));
     }
 
     Promise.all(promises)
       .then(() => {
-        history.push("/")
+        history.push("/user");
       })
       .catch(() => {
-        setError("Failed to update your profile")
+        setError("Failed to update your profile");
       })
       .finally(() => {
-        setLoading(false)
-    })
+        setLoading(false);
+      });
   }
 
   return (
-    <>
+    <CenteredContainer>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Update Profile</h2>
@@ -52,25 +53,28 @@ export default function UpdateProfile() {
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control 
-                type="email" 
-                ref={emailRef} 
-                required 
-                defaultValue={currentUser.email} />
+              <Form.Control
+                type="email"
+                ref={emailRef}
+                required
+                defaultValue={currentUser.email}
+              />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type="password" 
-                ref={passwordRef} 
-                placeholder="Leave blank to keep the same" />
+                type="password"
+                ref={passwordRef}
+                placeholder="Leave blank to keep the same"
+              />
             </Form.Group>
             <Form.Group id="password-confirm">
               <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control 
-                type="password" 
-                ref={passwordConfirmRef} 
-                placeholder="Leave blank to keep the same" />
+              <Form.Control
+                type="password"
+                ref={passwordConfirmRef}
+                placeholder="Leave blank to keep the same"
+              />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
               Update
@@ -79,8 +83,8 @@ export default function UpdateProfile() {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        <Link to="/">Cancel</Link>
+        <Link to="/user">Cancel</Link>
       </div>
-    </>
+    </CenteredContainer>
   );
 }

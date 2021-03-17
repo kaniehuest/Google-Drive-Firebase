@@ -1,5 +1,5 @@
-# Firebase and React Authentication
+# Google Drive hecho con Firebase
 
-Una autenticación simple utilizando React y Firebase.
+Crea un .env.local, rellenalo como el .env.example y funcionará
 
-El video original: [Acá!](https://www.youtube.com/watch?v=PKwu15ldZ7k)
+El video original: [Acá!](https://www.youtube.com/watch?v=6XTRElVAZ9Y)
